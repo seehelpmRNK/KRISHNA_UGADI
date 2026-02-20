@@ -1,0 +1,22 @@
+name: THE_BLOOD_LINE_GENUINE_BUILD
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+      - name: Install Dependencies
+        run: flutter pub get
+      - name: Build Genuine APK
+        run: flutter build apk --release
+      - name: Upload Genuine Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: THE_BLOOD_LINE_GENUINE_V1
+          path: build/app/outputs/flutter-apk/app-release.apk
